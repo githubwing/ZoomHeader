@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:layout_marginTop="10dp"
+    android:paddingLeft="16dp"
+    android:paddingTop="10dp"
+    android:background="#fff"
+    android:paddingBottom="10dp"
+    >
+<LinearLayout
+    android:gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+  <ImageView
+      android:src="@drawable/avatar"
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      />
+
+  <LinearLayout
+      android:layout_marginLeft="10dp"
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      >
+    <TextView
+        android:textColor="#000"
+        android:text="饿了么体验专员"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:text="2016-10-21"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+  </LinearLayout>
+</LinearLayout>
+<TextView
+    android:paddingTop="10dp"
+    android:textColor="#000"
+    android:text="味道还不错可是没有想象中那么好之前听说有打折活动。可是这次没有，服务员不是很有空理你。然后上菜都把我们给忘了心塞，等了一个小时，后面端上来了芝士不太拉丝都粘成一坨了，鸡肉也不是很脆啊，不过他的那个小菜还不错，饮料也太甜了，还行吧。喜欢可以去试试"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    />
+
+</LinearLayout>

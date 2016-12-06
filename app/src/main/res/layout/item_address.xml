@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+  <LinearLayout
+      android:paddingTop="16dp"
+      android:paddingBottom="16dp"
+      android:paddingLeft="10dp"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="1px"
+      android:background="#fff"
+      android:gravity="center_vertical"
+      android:orientation="horizontal"
+      >
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/location"
+        />
+    <TextView
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="番禺区番禺大道北543号龙美段(天安科技圆旁)"
+        android:textColor="#000"
+        android:textSize="16sp"
+        />
+    <ImageView
+        android:layout_marginRight="10dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/phone"
+        />
+  </LinearLayout>
+
+</LinearLayout>
