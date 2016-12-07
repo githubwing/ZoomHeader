@@ -33,7 +33,12 @@ public class MainActivity extends AppCompatActivity {
     mZoomHeader = (ZoomHeaderView) findViewById(R.id.zoomHeader);
     mViewPager.setAdapter(new Adapter());
     mViewPager.setOffscreenPageLimit(4);
-    mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    CtrlLinearLayoutManager layoutManager = new CtrlLinearLayoutManager(this);
+
+    //未展开禁止滑动
+    layoutManager.setScrollEnabled(false);
+    mRecyclerView.setLayoutManager(layoutManager);
+
     mRecyclerView.setAdapter(new ListAdapter());
     mRecyclerView.setAlpha(0);
     mBottomView = (RelativeLayout) findViewById(R.id.rv_bottom);

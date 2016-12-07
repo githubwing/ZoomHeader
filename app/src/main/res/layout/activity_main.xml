@@ -18,6 +18,27 @@
       app:layout_behavior="com.wingsofts.zoomimageheader.ZoomHeaderBehavior"
       />
 
+
+  <RelativeLayout
+      android:layout_gravity="bottom"
+      android:id="@+id/rv_bottom"
+      android:layout_alignParentBottom="true"
+      android:layout_width="match_parent"
+      android:layout_height="60dp">
+
+    <ImageView
+        android:alpha="5"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/cart" />
+
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#88000000" />
+  </RelativeLayout>
+
   <com.wingsofts.zoomimageheader.ZoomHeaderView
       android:id="@+id/zoomHeader"
       android:layout_width="match_parent"
@@ -54,26 +75,5 @@
         />
   </com.wingsofts.zoomimageheader.ZoomHeaderView>
 
-
-
-  <RelativeLayout
-      android:layout_gravity="bottom"
-      android:id="@+id/rv_bottom"
-      android:layout_alignParentBottom="true"
-      android:layout_width="match_parent"
-      android:layout_height="60dp">
-
-    <ImageView
-        android:alpha="5"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/cart" />
-
-    <View
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="#88000000" />
-  </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

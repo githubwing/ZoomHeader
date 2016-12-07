@@ -143,6 +143,9 @@ public class ZoomHeaderView extends LinearLayout {
     va.start();
 
 
+    //禁止滑动
+    ((CtrlLinearLayoutManager)mRecyclerView.getLayoutManager()).setScrollEnabled(false);
+
 
     //底部隐藏
 
@@ -174,6 +177,8 @@ public class ZoomHeaderView extends LinearLayout {
     va.setInterpolator(new DecelerateInterpolator());
     va.setDuration(500);
     va.start();
+    //允许滑动
+    ((CtrlLinearLayoutManager)mRecyclerView.getLayoutManager()).setScrollEnabled(true);
 
 
     //底部上移
