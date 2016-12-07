@@ -207,9 +207,7 @@ public class ZoomHeaderView extends LinearLayout {
 
       @Override public void onAnimationEnd(Animation animation) {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
           ((Activity) getContext()).finish();
-        }
       }
 
       @Override public void onAnimationRepeat(Animation animation) {

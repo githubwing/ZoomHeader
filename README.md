@@ -18,6 +18,7 @@
 
 
 
+
 ### 他是一个Activity还是两个？
 
 相信你肯定有这样的疑问，答案是一个。你看到的中间imageview是viewpager。在Viewpager上面是一个透明的View。当然，这个Activity的背景也是透明的。
