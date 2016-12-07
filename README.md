@@ -8,9 +8,14 @@
 
 ## [下载体验](https://github.com/githubwing/ZoomHeader/raw/master/app-debug.apk)
 
+
+**先吐槽下饿了么。不提示左右可以滑动。我还是无意中发现的。不提示我怎么知道可以滑动？？**
+
+
 这是一个模仿饿了么详情页的例子。
 
 讲述了如何实现。具体祥见源码。
+
 
 
 ### 他是一个Activity还是两个？
