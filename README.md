@@ -11,12 +11,8 @@
 
 **先吐槽下饿了么。不提示左右可以滑动。我还是无意中发现的。不提示我怎么知道可以滑动？？**
 
-
-这是一个模仿饿了么详情页的例子。
-
+这是一个模仿饿了么详情页的例子。**并非一个库，并非拿来就可以用，主要讲解思路以及如何实现，可能有一些细节没有处理。**
 讲述了如何实现。具体祥见源码。
-
-
 
 
 ### 他是一个Activity还是两个？
@@ -167,3 +163,20 @@ denpendcy为HeaderView。并且监听RecyclerView的滑动。
 如果你觉得还不错，欢迎Star  
 欢迎加入我的qq群: 425983695
 
+
+
+# License
+
+    Copyright 2016 androidwing1992
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
