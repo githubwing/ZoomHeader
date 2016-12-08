@@ -17,7 +17,9 @@
 
 ### 他是一个Activity还是两个？
 
-相信你肯定有这样的疑问，答案是一个。你看到的中间imageview是viewpager。在Viewpager上面是一个透明的View。当然，这个Activity的背景也是透明的。
+相信你肯定有这样的疑问，答案是一个。所以这**不是**用共享元素实现的，使用共享元素会导致图片无法跟随手指移动。
+
+你看到的中间imageview是viewpager。在Viewpager上面是一个透明的View。当然，这个Activity的背景也是透明的。
 
 ### 实现思路
 
