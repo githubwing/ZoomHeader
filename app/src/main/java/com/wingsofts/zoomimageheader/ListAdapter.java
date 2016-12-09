@@ -19,16 +19,16 @@ class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     LayoutInflater inflater = LayoutInflater.from(parent.getContext());
     switch (viewType) {
       case TYPE_ADDRESS:
-        return new ViewHolder(inflater.inflate(R.layout.item_address, parent,false));
+        return new ViewHolder(inflater.inflate(R.layout.item_address, parent, false));
       case TYPE_TIME:
-        return new ViewHolder(inflater.inflate( R.layout.item_time, parent,false));
+        return new ViewHolder(inflater.inflate(R.layout.item_time, parent, false));
       case TYPE_RECOMMEND:
-        return new ViewHolder(inflater.inflate(R.layout.item_recommend, parent,false));
+        return new ViewHolder(inflater.inflate(R.layout.item_recommend, parent, false));
       case TYPE_COMMENT:
-        return new ViewHolder(inflater.inflate(R.layout.item_comment,parent,false));
+        return new ViewHolder(inflater.inflate(R.layout.item_comment, parent, false));
     }
 
-    return new ViewHolder(inflater.inflate(R.layout.item_comment,parent,false));
+    return new ViewHolder(inflater.inflate(R.layout.item_comment, parent, false));
   }
 
   @Override public void onBindViewHolder(ViewHolder holder, int position) {

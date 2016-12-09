@@ -29,8 +29,7 @@ public class ZoomHeaderBehavior extends CoordinatorLayout.Behavior<View> {
 
   @Override public boolean onDependentViewChanged(CoordinatorLayout parent, final View child,
       View dependency) {
-
-    init((RecyclerView) child, (ZoomHeaderView) dependency);
+    init((RecyclerView) child, dependency);
 
     //recyclerView Top始终处于ZoomHeaderView bottom
     child.setY(dependency.getY() + dependency.getHeight());
@@ -41,6 +40,7 @@ public class ZoomHeaderBehavior extends CoordinatorLayout.Behavior<View> {
       //对所有item进行缩
       changeView(child, dependency, viewPager, i);
     }
+
     return super.onDependentViewChanged(parent, child, dependency);
   }
 
@@ -48,13 +48,13 @@ public class ZoomHeaderBehavior extends CoordinatorLayout.Behavior<View> {
    * 改变view的形状之类的
    */
   private void changeView(View child, View dependency, ViewPager viewPager, int i) {
-    View v = viewPager.getChildAt(i);
-    View target = v.findViewById(R.id.linearLayout);
-    View img = v.findViewById(R.id.imageView);
-    View bottom = v.findViewById(R.id.ll_bottom);
-    View buyButton = v.findViewById(R.id.btn_buy);
-    View nameTxt = v.findViewById(R.id.tv_name);
-    View costText = v.findViewById(R.id.tv_cost);
+    View view = viewPager.getChildAt(i);
+    View target = view.findViewById(R.id.linearLayout);
+    View img = view.findViewById(R.id.imageView);
+    View bottom = view.findViewById(R.id.ll_bottom);
+    View buyButton = view.findViewById(R.id.btn_buy);
+    View nameTxt = view.findViewById(R.id.tv_name);
+    View costText = view.findViewById(R.id.tv_cost);
     View left = null;
 
     if (viewPager.getCurrentItem() > 0) {
@@ -104,9 +104,9 @@ public class ZoomHeaderBehavior extends CoordinatorLayout.Behavior<View> {
   /**
    * 初始化一些属性
    */
-  private void init(final RecyclerView child, ZoomHeaderView dependency) {
+  private void init(final RecyclerView child, View dependency) {
     if (isFirst) {
-      mDependency = dependency;
+      mDependency = (ZoomHeaderView) dependency;
       isFirst = false;
       mDependency.setRecyclerView(child);
       child.addOnScrollListener(new RecyclerView.OnScrollListener() {

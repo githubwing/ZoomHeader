@@ -35,6 +35,8 @@ public class ZoomHeaderView extends LinearLayout {
   //图片放到最大时候的y
   private float mMaxY;
 
+  private final int ANIMATE_LENGTH = 500;
+
   //底部栏的起始Y
   private int mBottomY;
 
@@ -70,17 +72,12 @@ public class ZoomHeaderView extends LinearLayout {
 
         //向上滑动viewpager整体移动
         if (currentY + moveY < 0 && currentY + moveY > -getHeight() / 2) {
-          mMaxY = currentY + moveY;
-          setTranslationY(currentY + moveY);
-          mCloseTxt.setAlpha(0f);
+          doPagerUp(moveY, currentY);
         }
 
         //向下移动
         if (currentY + moveY > 0 && currentY + moveY < 800) {
-          View v = mViewPager.getChildAt(mViewPager.getCurrentItem());
-          v.setTranslationY((currentY + moveY)/4);
-          mCloseTxt.setAlpha(v.getY() / 76);
-
+          doPagerDown(moveY, currentY);
           return true;
         }
         break;
@@ -102,11 +99,10 @@ public class ZoomHeaderView extends LinearLayout {
 
         //超过展开阀值
         if (upY + currentUpY < -getHeight() / 4) {
-
           if (upY + currentUpY < mMaxY) {
-            expand(mMaxY, 0);
+            expand(mMaxY);
           } else {
-            expand(upY, currentUpY);
+            expand(upY + currentUpY);
           }
         }
 
@@ -115,23 +111,36 @@ public class ZoomHeaderView extends LinearLayout {
     return super.onTouchEvent(ev);
   }
 
+  private void doPagerDown(float moveY, float currentY) {
+    int pos = mViewPager.getCurrentItem();
+    View v = mViewPager.getChildAt(pos);
+    v.setTranslationY((currentY + moveY) / 4);
+    mCloseTxt.setAlpha(v.getY() / 76);
+  }
+
+  private void doPagerUp(float moveY, float currentY) {
+    mMaxY = currentY + moveY;
+    setTranslationY(currentY + moveY);
+    mCloseTxt.setAlpha(0f);
+  }
+
   public void restore(float y) {
     mCloseTxt.setAlpha(0f);
     if (y > mFirstY) {
-      ValueAnimator alphaAnimate = ValueAnimator.ofFloat(1, 0);
-      alphaAnimate.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+      ValueAnimator closeVa = ValueAnimator.ofFloat(1, 0);
+      closeVa.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
         @Override public void onAnimationUpdate(ValueAnimator animation) {
           mCloseTxt.setAlpha((Float) animation.getAnimatedValue());
         }
       });
-      alphaAnimate.setDuration(500);
-      alphaAnimate.start();
+      closeVa.setDuration(ANIMATE_LENGTH);
+      closeVa.start();
     }
 
-    mRecyclerView.smoothScrollToPosition(0);
-    ValueAnimator va = ValueAnimator.ofFloat(y, mFirstY);
-    va.setInterpolator(new DecelerateInterpolator());
-    va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+    mRecyclerView.scrollToPosition(0);
+    ValueAnimator restoreVa = ValueAnimator.ofFloat(y, mFirstY);
+    restoreVa.setInterpolator(new DecelerateInterpolator());
+    restoreVa.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override public void onAnimationUpdate(ValueAnimator animation) {
         float y = (float) animation.getAnimatedValue();
         setTranslationY(y);
@@ -139,32 +148,28 @@ public class ZoomHeaderView extends LinearLayout {
         mViewPager.canScroll = true;
       }
     });
-    va.setDuration(500);
-    va.start();
-
+    restoreVa.setDuration(ANIMATE_LENGTH);
+    restoreVa.start();
 
     //禁止滑动
-    ((CtrlLinearLayoutManager)mRecyclerView.getLayoutManager()).setScrollEnabled(false);
-
+    ((CtrlLinearLayoutManager) mRecyclerView.getLayoutManager()).setScrollEnabled(false);
 
     //底部隐藏
 
-
-    ValueAnimator bottomAnimate = ValueAnimator.ofFloat(mBottomView.getY(),mBottomY+mBottomView.getHeight());
+    ValueAnimator bottomAnimate =
+        ValueAnimator.ofFloat(mBottomView.getY(), mBottomY + mBottomView.getHeight());
     bottomAnimate.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-      @Override
-      public void onAnimationUpdate(ValueAnimator animation) {
+      @Override public void onAnimationUpdate(ValueAnimator animation) {
         mBottomView.setY((Float) animation.getAnimatedValue());
-
       }
     });
 
     bottomAnimate.start();
   }
 
-  private void expand(float upY, float currentUpY) {
+  private void expand(float y) {
     mRecyclerView.scrollToPosition(0);
-    ValueAnimator va = ValueAnimator.ofFloat(currentUpY + upY, -getHeight() / 3);
+    ValueAnimator va = ValueAnimator.ofFloat(y, -getHeight() / 3);
     va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override public void onAnimationUpdate(ValueAnimator animation) {
         float y = (float) animation.getAnimatedValue();
@@ -175,44 +180,35 @@ public class ZoomHeaderView extends LinearLayout {
     });
 
     va.setInterpolator(new DecelerateInterpolator());
-    va.setDuration(500);
+    va.setDuration(ANIMATE_LENGTH);
     va.start();
     //允许滑动
-    ((CtrlLinearLayoutManager)mRecyclerView.getLayoutManager()).setScrollEnabled(true);
-
+    ((CtrlLinearLayoutManager) mRecyclerView.getLayoutManager()).setScrollEnabled(true);
 
     //底部上移
 
-
-    ValueAnimator bottomAnimate = ValueAnimator.ofFloat(mBottomView.getY(),mBottomY);
+    ValueAnimator bottomAnimate = ValueAnimator.ofFloat(mBottomView.getY(), mBottomY);
     bottomAnimate.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-      @Override
-      public void onAnimationUpdate(ValueAnimator animation) {
+      @Override public void onAnimationUpdate(ValueAnimator animation) {
         mBottomView.setY((Float) animation.getAnimatedValue());
-
       }
     });
 
     bottomAnimate.start();
-
   }
 
-  public void expand() {
-    setTranslationY(-getHeight() / 3);
-  }
 
   private void finish() {
-    TranslateAnimation ta = new TranslateAnimation(0, 0, 0, 1000);
-    ta.setDuration(500);
-    ta.setFillAfter(true);
-    ta.setAnimationListener(new Animation.AnimationListener() {
+    TranslateAnimation finishTa = new TranslateAnimation(0, 0, 0, 1000);
+    finishTa.setDuration(ANIMATE_LENGTH);
+    finishTa.setFillAfter(true);
+    finishTa.setAnimationListener(new Animation.AnimationListener() {
       @Override public void onAnimationStart(Animation animation) {
 
       }
 
       @Override public void onAnimationEnd(Animation animation) {
-
-          ((Activity) getContext()).finish();
+        ((Activity) getContext()).finish();
       }
 
       @Override public void onAnimationRepeat(Animation animation) {
@@ -220,7 +216,7 @@ public class ZoomHeaderView extends LinearLayout {
       }
     });
 
-    startAnimation(ta);
+    startAnimation(finishTa);
   }
 
   @Override public boolean onInterceptTouchEvent(MotionEvent ev) {
@@ -257,11 +253,11 @@ public class ZoomHeaderView extends LinearLayout {
     this.mRecyclerView = recyclerView;
   }
 
-  public RelativeLayout getmBottomView() {
+  public RelativeLayout getBottomView() {
     return mBottomView;
   }
 
-  public void setmBottomView(RelativeLayout mBottomView,int bottomY) {
+  public void setBottomView(RelativeLayout mBottomView, int bottomY) {
     this.mBottomView = mBottomView;
     mBottomY = bottomY;
   }

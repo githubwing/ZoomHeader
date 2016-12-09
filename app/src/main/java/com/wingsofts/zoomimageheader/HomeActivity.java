@@ -20,7 +20,6 @@ public class HomeActivity extends AppCompatActivity {
     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
     recyclerView.setAdapter(new ListAdapter());
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
   }
 
   class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
@@ -28,14 +27,13 @@ public class HomeActivity extends AppCompatActivity {
     @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
       LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
-      return new ViewHolder(inflater.inflate(R.layout.item_home,parent,false));
+      return new ViewHolder(inflater.inflate(R.layout.item_home, parent, false));
     }
 
     @Override public void onBindViewHolder(ViewHolder holder, int position) {
       holder.itemView.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View v) {
-          Intent intent = new Intent(HomeActivity.this,MainActivity.class);
-
+          Intent intent = new Intent(HomeActivity.this, MainActivity.class);
           startActivity(intent);
         }
       });
@@ -51,7 +49,5 @@ public class HomeActivity extends AppCompatActivity {
         super(view);
       }
     }
-
   }
-
 }
