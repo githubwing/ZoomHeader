@@ -35,7 +35,7 @@ public class ZoomHeaderView extends LinearLayout {
   //图片放到最大时候的y
   private float mMaxY;
 
-  private final int ANIMATE_LENGTH = 500;
+  private final int ANIMATE_LENGTH = 300;
 
   //底部栏的起始Y
   private int mBottomY;
@@ -168,9 +168,7 @@ public class ZoomHeaderView extends LinearLayout {
   }
 
   private void expand(float y) {
-    if (null != mRecyclerView) {
       mRecyclerView.scrollToPosition(0);
-    }
     ValueAnimator va = ValueAnimator.ofFloat(y, -getHeight() / 3);
     va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override public void onAnimationUpdate(ValueAnimator animation) {
