@@ -168,7 +168,9 @@ public class ZoomHeaderView extends LinearLayout {
   }
 
   private void expand(float y) {
-    mRecyclerView.scrollToPosition(0);
+    if (null != mRecyclerView) {
+      mRecyclerView.scrollToPosition(0);
+    }
     ValueAnimator va = ValueAnimator.ofFloat(y, -getHeight() / 3);
     va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override public void onAnimationUpdate(ValueAnimator animation) {
@@ -196,7 +198,6 @@ public class ZoomHeaderView extends LinearLayout {
 
     bottomAnimate.start();
   }
-
 
   private void finish() {
     TranslateAnimation finishTa = new TranslateAnimation(0, 0, 0, 1000);
